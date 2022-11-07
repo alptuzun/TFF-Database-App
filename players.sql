@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2022 at 03:39 PM
+-- Generation Time: Nov 07, 2022 at 05:50 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tff_306`
+-- Database: `tff-306`
 --
 
 -- --------------------------------------------------------
@@ -33,6 +33,17 @@ CREATE TABLE `players` (
   `goal_count` int(11) NOT NULL,
   `age` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `players`
+--
+
+INSERT INTO `players` (`player_id`, `full_name`, `goal_count`, `age`) VALUES
+(1, 'Arda Turan', 10, 35),
+(2, 'ILYAS YESILYAPRAK', 45, 23),
+(3, 'DENIZHAN ALTAN', 53, 21),
+(4, 'MINE ERGIN', 81, 21),
+(5, 'ALP YELEKCI', 28, 22);
 
 --
 -- Indexes for dumped tables
