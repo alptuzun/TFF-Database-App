@@ -1,5 +1,37 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        input[id=name], select {
+          /*width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;*/
+        }
+        
+        input[id=email] {
+          /*width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;*/
+        }
+        
+        input[id=password]{
+          /*background-color: #45a049;*/
+        }
+        
+        div {
+          /*border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;*/
+        }
+        </style>
 <head>
     <title>Search</title>
     <meta charset="UTF-8">
@@ -8,34 +40,37 @@
     <script src="/js/validation.js" defer></script>
 </head>
 
-<body style = "background-color: antiquewhite ;background-image: url(https://lh3.googleusercontent.com/fife/AAbDypCMjKsLOWKtd00hzPjmHQVhqWzCFgAO-FRZZVjXRotVs6U3OpBMNxHG8i7VwF_lHD3II_P9B33spcBa1tAA-IT6cNeJOwqOPa6lzJFD54FM-xpY0bN9Kl-vKCXdnOiU5aUO_QCrh9JrPVWid5_TXeLw6mOK74YJk1te4c119nfrrrGvOCZ7UV8qXR4J0KQMn3tM8gIjIuGhr5q6vs9sLC0Q3iECWTTMd6A1JdrtD6SMlXkfQxW4FEJaJTLt2LJc_EtXqY25iI4ImTAuttzseZ7wIzHnY7REfEFDl5HirRl7xubPUNkViLqoH0j3eRKuaTY7FSDosuQ5fvGWUPdc5OHAf7YR7gDA2nIiZ0VN87w4T0df0IswH0KuNTFMiLguGZF41WV4tjNRV0wMAvyAwqfyN8AuMy6tq7NusN2xMpy-j7gTN-xwZjx2hmhLRNVWv29tYanvht28CpVZG3SRmMJI5bpV9vw_yKrePJeXKQ0-QFDG1x00luyw99HxG_G1Ia4lVPsjBv2r_8aoq0TkvTlUoa0xwtucZQS-q9gRYupZ473_DE9uNvBBvkD_sItQb7qYl2WVeJoXLUtAtiRQx_s3WC-OfDyRWbK04ulrMSXpxkZhrsmEob5M6qjzcA96wboeF2JQ1-4Q95_H6ew9s7ppVASGiyUBHmZ8M8pJEczI3iheNSELyJVU_VNnv961P3ynqeE6wks_5doiup-PdGiJTfYEP-0OntDHHmngAvPmy7FQog2mEZfKG2N9f0x10OWBMHpt3dQueA6mhC6Z7npGBzUwjfvBKSAK9SYuiLG3otteLyeLkkSM7L-NJ4U0X5JqhlKJJXU7Cmg_zbdeE3HLg1EJL2VCvTS5FrE4PN-wzzsel1_VNiOu3v6bfbZ2LDTgFwX47v0Rb2XH9mvWhuTtWI3AGjhswjkTlJRhmzWqxksJ74wKttA9tTy8saErMqCCB_92YofTdinDAnTXv0LWDjxIoli4fVD3AmFi9KY-BXlPwKsl24p_jhsIF3mtXPwgKEG1kGyzxwkLR64RpjzLedf3B00ZlDqgIYZB64Hx3J_OCbt4gwy6kz-YNUfIlUHYTD8eS-rwlOd8qsh2UQtvF4krCRxE-y-c_1sl4WeCxNRdJC-CA8MfN_1fUfcXIzNs0gOuvziUsemmsdIgKrz8DEd5Co-Wv2VczJ1bQcXk_-BeSam8ZEyaZhrqGBX8AIyQuaWO72FBnYiL2E3emm88IFhd2JO1iVnOWbl5ORLQG3aBtREYgDdfIo3MPeCr_QqLfxsZEt8Tqpk3IdOcdCVvI6IBrR7T63AA46DFlUa59M1rwRJBhb6JfCRUS-OqinJqzSnt7__jb481yhfBSbsIaisjDBc6bMBn3vU5AnHG0Out3LDAHpKoDvxYgfxxib0fSHzBJdfzFH0jRQlhxh3zg5-iZByMss43pGruDYQOLRaBwFVIJJmKLwb0K1PLOb4kwYmSMcEEmurbMFH4vVYwxCCFCsMIdX0tq6VZCJGbmoBC9NDC9Bd7ivg=w320-h200-k);background-repeat: no-repeat; background-position: center center;">
+<body style = "background-color: rgb(229, 172, 157);background-image: url(https://lh3.googleusercontent.com/fife/AAbDypCMjKsLOWKtd00hzPjmHQVhqWzCFgAO-FRZZVjXRotVs6U3OpBMNxHG8i7VwF_lHD3II_P9B33spcBa1tAA-IT6cNeJOwqOPa6lzJFD54FM-xpY0bN9Kl-vKCXdnOiU5aUO_QCrh9JrPVWid5_TXeLw6mOK74YJk1te4c119nfrrrGvOCZ7UV8qXR4J0KQMn3tM8gIjIuGhr5q6vs9sLC0Q3iECWTTMd6A1JdrtD6SMlXkfQxW4FEJaJTLt2LJc_EtXqY25iI4ImTAuttzseZ7wIzHnY7REfEFDl5HirRl7xubPUNkViLqoH0j3eRKuaTY7FSDosuQ5fvGWUPdc5OHAf7YR7gDA2nIiZ0VN87w4T0df0IswH0KuNTFMiLguGZF41WV4tjNRV0wMAvyAwqfyN8AuMy6tq7NusN2xMpy-j7gTN-xwZjx2hmhLRNVWv29tYanvht28CpVZG3SRmMJI5bpV9vw_yKrePJeXKQ0-QFDG1x00luyw99HxG_G1Ia4lVPsjBv2r_8aoq0TkvTlUoa0xwtucZQS-q9gRYupZ473_DE9uNvBBvkD_sItQb7qYl2WVeJoXLUtAtiRQx_s3WC-OfDyRWbK04ulrMSXpxkZhrsmEob5M6qjzcA96wboeF2JQ1-4Q95_H6ew9s7ppVASGiyUBHmZ8M8pJEczI3iheNSELyJVU_VNnv961P3ynqeE6wks_5doiup-PdGiJTfYEP-0OntDHHmngAvPmy7FQog2mEZfKG2N9f0x10OWBMHpt3dQueA6mhC6Z7npGBzUwjfvBKSAK9SYuiLG3otteLyeLkkSM7L-NJ4U0X5JqhlKJJXU7Cmg_zbdeE3HLg1EJL2VCvTS5FrE4PN-wzzsel1_VNiOu3v6bfbZ2LDTgFwX47v0Rb2XH9mvWhuTtWI3AGjhswjkTlJRhmzWqxksJ74wKttA9tTy8saErMqCCB_92YofTdinDAnTXv0LWDjxIoli4fVD3AmFi9KY-BXlPwKsl24p_jhsIF3mtXPwgKEG1kGyzxwkLR64RpjzLedf3B00ZlDqgIYZB64Hx3J_OCbt4gwy6kz-YNUfIlUHYTD8eS-rwlOd8qsh2UQtvF4krCRxE-y-c_1sl4WeCxNRdJC-CA8MfN_1fUfcXIzNs0gOuvziUsemmsdIgKrz8DEd5Co-Wv2VczJ1bQcXk_-BeSam8ZEyaZhrqGBX8AIyQuaWO72FBnYiL2E3emm88IFhd2JO1iVnOWbl5ORLQG3aBtREYgDdfIo3MPeCr_QqLfxsZEt8Tqpk3IdOcdCVvI6IBrR7T63AA46DFlUa59M1rwRJBhb6JfCRUS-OqinJqzSnt7__jb481yhfBSbsIaisjDBc6bMBn3vU5AnHG0Out3LDAHpKoDvxYgfxxib0fSHzBJdfzFH0jRQlhxh3zg5-iZByMss43pGruDYQOLRaBwFVIJJmKLwb0K1PLOb4kwYmSMcEEmurbMFH4vVYwxCCFCsMIdX0tq6VZCJGbmoBC9NDC9Bd7ivg=w320-h200-k);background-repeat: no-repeat; background-position: center;">
     
     <h1>Search from Database</h1>
 
-    <h3>Please select the </h3>
+    <h3>Please select the data to be search and enter appropriate filters, if necessary.</h3>
     
-    <form action="process-signup.php" method="post" id="signup" novalidate>
+    <form action="" method="get" id="search_querry" novalidate>
         <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name">
+            <div style="margin-bottom: 5%;" >
+                <label for="name">Full Name of the Player</label>
+                <input type="text" id="full_name" name="name">
+            </div>            
+            <div style="position :absolute;left: 38%;bottom: 73%;">
+                <label for="exact_name_checkbox">Exact Name</label>
+                <input type="checkbox" name="exact_name" id="exact_name_checkbox">
+            </div>
         </div>
-        
-        <div>
-            <label for="email">email</label>
-            <input type="email" id="email" name="email">
+        <div style="margin-bottom: 5%;" >
+            <label for="range">Goal Count</label>
+            <input type="range" value="0" min="0" oninput=" this.nextElementSibling.value = this.value">
+            <output>0</output>
         </div>
-        
-        <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+        <div style="margin-bottom: 5%;" >
+            <label for="birthPlace">Birth Place</label>
+            <input type="text" id="birthPlace" name="birth_place">
         </div>
-        
-        <div>
-            <label for="password_confirmation">Repeat password</label>
-            <input type="password" id="password_confirmation" name="password_confirmation">
+        <div style="margin-bottom: 5%;" >
+            <label for="age">Player Age</label>
+            <input type="text" id="age" name="player_age">
         </div>
-        
-        <button>Sign up</button>
+        <button>Search</button>
     </form>
     
 </body>
