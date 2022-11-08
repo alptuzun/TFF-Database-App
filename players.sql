@@ -40,10 +40,11 @@ CREATE TABLE `players` (
 
 INSERT INTO `players` (`player_id`, `full_name`, `goal_count`, `age`) VALUES
 (1, 'Arda Turan', 10, 35),
-(2, 'ILYAS YESILYAPRAK', 45, 23),
-(3, 'DENIZHAN ALTAN', 53, 21),
-(4, 'MINE ERGIN', 81, 21),
-(5, 'ALP YELEKCI', 28, 22);
+(2, 'İlyas Yeşilyaprak', 45, 23),
+(3, 'Denizhan Altan', 53, 21),
+(4, 'Mine Ergin', 81, 21),
+(5, 'Alp Yelekçi', 28, 22),
+(6, 'Alp Tüzün', 36, 21);
 
 --
 -- Indexes for dumped tables

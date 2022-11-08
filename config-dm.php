@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', '', 'tff-306');
+$db = mysqli_connect('localhost', 'root', '', 'tff');
 
 if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
