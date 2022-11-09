@@ -1,5 +1,5 @@
 <?php
-
+    
 $db = mysqli_connect('localhost', 'root', '', 'tff');
 
 if ($db->connect_errno > 0) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2022 at 12:24 AM
+-- Generation Time: Nov 09, 2022 at 11:48 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -32,7 +32,7 @@ CREATE TABLE `players` (
   `full_name` varchar(50) NOT NULL,
   `goal_count` int(11) NOT NULL,
   `age` int(11) NOT NULL,
-  `birth_place` varchar(50) DEFAULT NULL
+  `birth_place` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -49,7 +49,9 @@ INSERT INTO `players` (`player_id`, `full_name`, `goal_count`, `age`, `birth_pla
 (7, 'Rachid Ghezzal', 25, 30, 'Decines'),
 (8, 'Juan Manuel Mata Garcia', 5, 34, 'Burgos'),
 (9, 'Mauro Emanuel Icardi', 8, 29, 'Rosario'),
-(10, 'Ferdi Erenay Kadıoğlu', 15, 23, 'Arnhem');
+(10, 'Ferdi Erenay Kadıoğlu', 15, 23, 'Arnhem'),
+(11, 'Omer Tugrul', 69, 30, 'Kayseri'),
+(12, 'Ali Devrim', 78, 26, 'Mimaroba');
 
 --
 -- Indexes for dumped tables
@@ -60,6 +62,16 @@ INSERT INTO `players` (`player_id`, `full_name`, `goal_count`, `age`, `birth_pla
 --
 ALTER TABLE `players`
   ADD PRIMARY KEY (`player_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `players`
+--
+ALTER TABLE `players`
+  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
