@@ -1,6 +1,6 @@
 <?php
 
-include "config.php";
+include "config-dm.php";
 
 if (!empty($_POST['player_id'])) 
 {
