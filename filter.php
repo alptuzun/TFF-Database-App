@@ -13,13 +13,8 @@ if(isset($_GET['age'])) {
         $goal_count = $row['goal_count'];
         $age = $row['age'];
 
-        echo $player_id . " " . $full_name . " " . $goal_count . $age . "<br>";
-    }
-    
-    
+        echo $player_id . " " . $full_name . " " . $goal_count . " " . $age . "<br>";
+    }   
+
 }
-
-
-
-
 ?>
