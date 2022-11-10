@@ -1,6 +1,6 @@
 <?php
 
-include "config.php"; // Makes mysql connection
+include "config-dm.php"; // Makes mysql connection
 
 $sql_statement = "SELECT * FROM players";
 
