@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title> View Players by Age Here </title>
-</head>
-<body>
+  <head>
+    <title>View Players by Age Here</title>
+  </head>
+
+  <body>
     <form action="filter.php" method="get">
-        <input type="number" min="15" name="lower_age" placeholder="Please enter the lower bound of the age range" />
-        <input type="number" max="60" name="higher_age" placeholder="Please enter the higher bound of the age range" />
-        <input type="submit" name="Search" ; style="background-color: rgb(33, 150, 29)"/>
-</form>
-</body>
+      <div style="margin-top: 2%">
+        <label for="lower_age">Lowest</label>
+        <input
+          type="number"
+          min="15"
+          name="lower_age"
+          placeholder="Please enter the lower bound of the age range"
+          style="width: 18%"
+        />
+        <label for="higher_age" style="margin-left: 4%">Highest</label>
+        <input
+          type="number"
+          max="60"
+          style="width: 18%"
+          name="higher_age"
+          placeholder="Please enter the higher bound of the age range"
+        />
+        <input
+          type="submit"
+          name="Search"
+          style="background-color: rgb(33, 150, 29)"
+        />
+      </div>
+    </form>
+    <form action="filter.php" method="get">
+      <div style="margin-top: 2%">
+        <label for="search_string">Search for a Match</label>
+        <input
+          type="text"
+          style="width: 36%"
+          name="search_string"
+          placeholder="Please enter the search string"
+        />
+        <input
+          type="submit"
+          name="Search"
+          style="background-color: rgb(33, 150, 29)"
+        />
+      </div>
+    </form>
+  </body>
 </html>
