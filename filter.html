@@ -5,7 +5,8 @@
 </head>
 <body>
     <form action="filter.php" method="get">
-        <input type="text" name="age" placeholder="Search for ages" id="age"/>
+        <input type="number" min="15" name="lower_age" placeholder="Please enter the lower bound of the age range" />
+        <input type="number" max="60" name="higher_age" placeholder="Please enter the higher bound of the age range" />
         <input type="submit" name="Search" ; style="background-color: rgb(33, 150, 29)"/>
 </form>
 </body>
