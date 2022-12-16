@@ -2,8 +2,6 @@
 
 include "config-dm.php"; 
 
-
-
 if (!empty($_POST['full_name'])){ 
     $full_name = $_POST['full_name']; 
     $goal_count = $_POST['goal_count']; 
