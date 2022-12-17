@@ -30,33 +30,32 @@ if (
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;
 
-    } else if (!empty($_POST['Award_ID']) && !empty($_POST['Season'])) {
-        $award_id = $_POST['Award_ID'];
-        $season = $_POST['Season'];
+    } else if (!empty($_POST['award_season'])) {
+
+        $season = $_POST['award_season'];
 
 
-        $sql_statement = "INSERT INTO awards (Award_ID, Season) VALUES ('$award_id','$season')";
-
-        $result = mysqli_query($db, $sql_statement);
-        echo "Your result is: " . $result;
-
-    } else if (!empty($_POST['Club_ID']) && !empty($_POST['Club_Name']) && !empty($_POST['Championship_Count'])) {
-
-        $club_id = $_POST['Club_ID'];
-        $club_name = $_POST['Club_Name'];
-        $championship_count = $_POST['Championship_Count'];
-
-
-        $sql_statement = "INSERT INTO clubs (Club_ID, Club_Name, Championship_Count) VALUES ('$club_id','$club_name','$championship_count')";
+        $sql_statement = "INSERT INTO awards (Season) VALUES ('$season')";
 
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;
 
-    } else if (!empty($_POST['Manager_ID']) && !empty($_POST['Club_ID']) && !empty($_POST['Tenure'])) {
+    } else if (!empty($_POST['club_Name']) && !empty($_POST['championship_count'])) {
 
-        $manager_id = $_POST['Manager_ID'];
-        $club_id = $_POST['Club_ID'];
-        $tenure = $_POST['Tenure'];
+        $club_name = $_POST['club_name'];
+        $championship_count = $_POST['championship_count'];
+
+
+        $sql_statement = "INSERT INTO clubs (Club_Name, Championship_Count) VALUES ('$club_name','$championship_count')";
+
+        $result = mysqli_query($db, $sql_statement);
+        echo "Your result is: " . $result;
+
+    } else if (!empty($_POST['club_managers_manager_id']) && !empty($_POST['club_managers_club_id']) && !empty($_POST['club_managers_tenure'])) {
+
+        $manager_id = $_POST['club_managers_manager_id'];
+        $club_id = $_POST['club_managers_club_id'];
+        $tenure = $_POST['club_managers_tenure'];
 
 
 
@@ -66,11 +65,11 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Stadium_ID']) && !empty($_POST['Club_ID']) && !empty($_POST['Stadium_Name'])) {
+    } else if (!empty($_POST['club_owns_stadium_id']) && !empty($_POST['club_owns_club_id']) && !empty($_POST['club_owns_stadium_name'])) {
 
-        $stadium_id = $_POST['Stadium_ID'];
-        $club_id = $_POST['Club_ID'];
-        $stadium_name = $_POST['Stadium_Name'];
+        $stadium_id = $_POST['club_owns_stadium_id'];
+        $club_id = $_POST['club_owns_club_id'];
+        $stadium_name = $_POST['club_owns_stadium_name'];
 
 
 
@@ -80,10 +79,10 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Club_ID']) && !empty($_POST['Player_ID'])) {
+    } else if (!empty($_POST['club_roster_club_id']) && !empty($_POST['club_roster_player_id'])) {
 
-        $club_id = $_POST['Club_ID'];
-        $player_id = $_POST['Player_ID'];
+        $club_id = $_POST['club_roster_club_id'];
+        $player_id = $_POST['club_roster_player_id'];
 
 
 
@@ -93,12 +92,12 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Transfer_ID']) && !empty($_POST['Club_ID']) && !empty($_POST['Player_ID']) && !empty($_POST['Season_Number'])) {
+    } else if (!empty($_POST['club_transfers_transfer_id']) && !empty($_POST['club_transfers_club_id']) && !empty($_POST['club_transfers_player_id']) && !empty($_POST['club_transfers_season_number'])) {
 
-        $transfer_id = $_POST['Transfer_ID'];
-        $club_id = $_POST['Club_ID'];
-        $player_id = $_POST['Player_ID'];
-        $season_number = $_POST['Season_Number'];
+        $transfer_id = $_POST['club_transfers_transfer_id'];
+        $club_id = $_POST['club_transfers_club_id'];
+        $player_id = $_POST['club_transfers_player_id'];
+        $season_number = $_POST['club_transfers_season_number'];
 
 
         $sql_statement = "INSERT INTO club_transfers (Transfer_ID, Club_ID, Player_ID, Season_Number) VALUES ('$transfer_id','$club_id','$player_id','$season_number')";
@@ -107,24 +106,24 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Cup_ID']) && !empty($_POST['Last_Champion']) && !empty($_POST['Cup_Name'])) {
-
-        $cup_id = $_POST['Cup_ID'];
-        $last_champion = $_POST['Last_Champion'];
-        $cup_name = $_POST['Cup_Name'];
+    } else if (!empty($_POST['cups_last_champion']) && !empty($_POST['cup_name'])) {
 
 
-        $sql_statement = "INSERT INTO cups (Cup_ID, Last_Champion, Cup_Name) VALUES ('$cup_id','$last_champion','$cup_name')";
+        $last_champion = $_POST['cups_last_champion'];
+        $cup_name = $_POST['cup_name'];
+
+
+        $sql_statement = "INSERT INTO cups (Last_Champion, Cup_Name) VALUES ('$last_champion','$cup_name')";
 
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Cup_ID']) && !empty($_POST['Club_ID']) && !empty($_POST['Season'])) {
+    } else if (!empty($_POST['cup_champions_cup_id']) && !empty($_POST['cup_champions_club_id']) && !empty($_POST['cup_champions_season'])) {
 
-        $cup_id = $_POST['Cup_ID'];
-        $club_id = $_POST['Club_ID'];
-        $season = $_POST['Season'];
+        $cup_id = $_POST['cup_champions_cup_id'];
+        $club_id = $_POST['cup_champions_club_id'];
+        $season = $_POST['cup_champions_season'];
 
 
         $sql_statement = "INSERT INTO cups (Cup_ID, Club_ID, Season) VALUES ('$cup_id','$club_id','$season')";
@@ -133,26 +132,27 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['League_ID']) && !empty($_POST['Name']) && !empty($_POST['Team_Count']) && !empty($_POST['Last_Champion']) && !empty($_POST['Prize_Money'])) {
-
-        $league_id = $_POST['League_ID'];
-        $name = $_POST['Name'];
-        $team_count = $_POST['Team_Count'];
-        $last_champion = $_POST['Last_Champion'];
-        $prize_money = $_POST['Prize_Money'];
+    } else if (!empty($_POST['league_name']) && !empty($_POST['team_count']) && !empty($_POST['last_champion']) && !empty($_POST['prize_money'])) {
 
 
-        $sql_statement = "INSERT INTO leagues (League_ID, Name, Team_Count, Last_Champion, Prize_Money) VALUES ('$league_id','$name','$team_count', '$last_champion', '$prize_money')";
+        $league_name = $_POST['league_name'];
+        $team_count = $_POST['team_count'];
+        $last_champion = $_POST['last_champion'];
+        $prize_money = $_POST['prize_money'];
+
+
+        //'Name' might caues a problem, if this is the case, change 'Name' to 'League_Name' in mySQL and here
+        $sql_statement = "INSERT INTO leagues (League_Name, Team_Count, Last_Champion, Prize_Money) VALUES ('$league_name','$team_count', '$last_champion', '$prize_money')";
 
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['League_ID']) && !empty($_POST['Club_ID']) && !empty($_POST['League_Name'])) {
+    } else if (!empty($_POST['league_roster_league_id']) && !empty($_POST['league_roster_club_id']) && !empty($_POST['league_roster_league_name'])) {
 
-        $league_id = $_POST['League_ID'];
-        $club_id = $_POST['Club_ID'];
-        $league_name = $_POST['League_Name'];
+        $league_id = $_POST['league_roster_league_id'];
+        $club_id = $_POST['league_roster_club_id'];
+        $league_name = $_POST['league_roster_league_name'];
 
 
         $sql_statement = "INSERT INTO league_roster (League_ID, Club_ID, League_Name) VALUES ('$league_id','$club_id','$league_name')";
@@ -161,12 +161,26 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Award_ID']) && !empty($_POST['Manager_ID']) && !empty($_POST['Season']) && !empty($_POST['Award_Type'])) {
+    } else if (!empty($_POST['manager_full_name']) && !empty($_POST['experience_years'])) {
 
-        $award_id = $_POST['Award_ID'];
-        $manager_id = $_POST['Manager_ID'];
-        $season = $_POST['Season'];
-        $award_type = $_POST['Award_Type'];
+        $manager_name = $_POST['manager_full_name'];
+        $experience_years = $_POST['experience_years'];
+
+
+        $sql_statement = "INSERT INTO manager (Full_Name, Experience_Years) VALUES ('$manager_name','$experience_years')";
+
+        $result = mysqli_query($db, $sql_statement);
+        echo "Your result is: " . $result;
+
+
+
+
+    } else if (!empty($_POST['manager_award_award_id']) && !empty($_POST['manager_award_manager_id']) && !empty($_POST['manager_award_season']) && !empty($_POST['manager_award_award_type'])) {
+
+        $award_id = $_POST['manager_award_award_id'];
+        $manager_id = $_POST['manager_award_manager_id'];
+        $season = $_POST['manager_award_season'];
+        $award_type = $_POST['manager_award_award_type'];
 
 
         $sql_statement = "INSERT INTO manager_awards (Award_ID, Manager_ID, Season, Award_Type) VALUES ('$award_id', '$manager_id','$season','$award_type')";
@@ -175,41 +189,39 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Match_ID']) && !empty($_POST['Host_ID']) && !empty($_POST['Guest_ID']) && !empty($_POST['Referee_ID']) && !empty($_POST['Score']) && !empty($_POST['Date_Time'])) {
+    } else if (!empty($_POST['host_id']) && !empty($_POST['guest_id']) && !empty($_POST['match_referee_id']) && !empty($_POST['match_score']) && !empty($_POST['match_datetime'])) {
 
-        $match_id = $_POST['Match_ID'];
-        $host_id = $_POST['Host_ID'];
-        $guest_id = $_POST['Guest_ID'];
-        $referee_id = $_POST['Referee_ID'];
-        $score = $_POST['Score'];
-        $date_time = $_POST['Date_Time'];
-
-
-        $sql_statement = "INSERT INTO match (Match_ID, Host_ID, Guest_ID, Referee_ID, Score, Date_Time) VALUES ('$match_id', '$host_id','$guest_id','$referee_id','$score','$date_time')";
-
-        $result = mysqli_query($db, $sql_statement);
-        echo "Your result is: " . $result;
+        $host_id = $_POST['host_id'];
+        $guest_id = $_POST['guest_id'];
+        $referee_id = $_POST['match_referee_id'];
+        $score = $_POST['match_score'];
+        $date_time = $_POST['match_datetime'];
 
 
-    } else if (!empty($_POST['Penalty_ID']) && !empty($_POST['Penalty_Type']) && !empty($_POST['Penalty_Length'])) {
-
-        $penalty_id = $_POST['Penalty_ID'];
-        $penalty_type = $_POST['Penalty_Type'];
-        $penalty_length = $_POST['Penalty_Length'];
-
-
-        $sql_statement = "INSERT INTO league_roster (Penalty_ID, Penalty_Type, Penalty_Length) VALUES ('$penalty_id','$penalty_type','$penalty_length')";
+        $sql_statement = "INSERT INTO match (Host_ID, Guest_ID, Referee_ID, Score, Date_Time) VALUES ('$host_id','$guest_id','$referee_id','$score','$date_time')";
 
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Award_ID']) && !empty($_POST['Player_ID']) && !empty($_POST['Season']) && !empty($_POST['Award_Type'])) {
+    } else if (!empty($_POST['penalty_type']) && !empty($_POST['penalty_length'])) {
 
-        $award_id = $_POST['Award_ID'];
-        $player_id = $_POST['Player_ID'];
-        $season = $_POST['Season'];
-        $award_type = $_POST['Award_Type'];
+        $penalty_type = $_POST['penalty_type'];
+        $penalty_length = $_POST['penalty_length'];
+
+
+        $sql_statement = "INSERT INTO league_roster (Penalty_Type, Penalty_Length) VALUES ('$penalty_type','$penalty_length')";
+
+        $result = mysqli_query($db, $sql_statement);
+        echo "Your result is: " . $result;
+
+
+    } else if (!empty($_POST['player_awards_award_id']) && !empty($_POST['player_awards_player_id']) && !empty($_POST['player_awards_season']) && !empty($_POST['player_awards_awards_type'])) {
+
+        $award_id = $_POST['player_awards_award_id'];
+        $player_id = $_POST['player_awards_player_id'];
+        $season = $_POST['player_awards_season'];
+        $award_type = $_POST['player_awards_awards_type'];
 
 
         $sql_statement = "INSERT INTO player_awards (Award_ID, Player_ID, Season, Award_Type) VALUES ('$award_id', '$player_id','$season','$award_type')";
@@ -218,10 +230,10 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Penalty_ID']) && !empty($_POST['Player_ID'])) {
+    } else if (!empty($_POST['punished_players_penalty_id']) && !empty($_POST['punished_players_player_id'])) {
 
-        $penalty_id = $_POST['Penalty_ID'];
-        $player_id = $_POST['Player_ID'];
+        $penalty_id = $_POST['punished_players_penalty_id'];
+        $player_id = $_POST['punished_players_player_id'];
 
 
 
@@ -231,40 +243,37 @@ if (
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Referee_ID']) && !empty($_POST['Year_Of_Experience']) && !empty($_POST['Full_Name'])) {
+    } else if (!empty($_POST['referees_experience']) && !empty($_POST['referees_full_name'])) {
 
-        $referee_id = $_POST['Referee_ID'];
-        $year_of_experience = $_POST['Year_Of_Experience'];
-        $full_name = $_POST['Full_Name'];
-
-
-        $sql_statement = "INSERT INTO referees (Referee_ID, Year_Of_Experience, Full_Name) VALUES ('$referee_id','$year_of_experience','$full_name')";
-
-        $result = mysqli_query($db, $sql_statement);
-        echo "Your result is: " . $result;
+        $year_of_experience = $_POST['referees_experience'];
+        $full_name = $_POST['referees_full_name'];
 
 
-    } else if (!empty($_POST['Stadium_ID']) && !empty($_POST['Stadium_Name'])) {
-
-        $stadium_id = $_POST['Stadium_ID'];
-        $stadium_name = $_POST['Stadium_Name'];
-
-
-
-        $sql_statement = "INSERT INTO stadiums (Stadium_ID, Stadium_Name) VALUES ('$stadium_id','$stadium_name')";
+        $sql_statement = "INSERT INTO referees (Year_Of_Experience, Full_Name) VALUES ('$year_of_experience','$full_name')";
 
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;
 
 
-    } else if (!empty($_POST['Transfer_ID']) && !empty($_POST['Contract_Date'])) {
+    } else if (!empty($_POST['stadium_name'])) {
 
-        $transfer_id = $_POST['Transfer_ID'];
-        $contract_date = $_POST['Contract_Date'];
-
+        $stadium_name = $_POST['stadium_name'];
 
 
-        $sql_statement = "INSERT INTO transfers (Transfer_ID, Contract_Date) VALUES ('$transfer_id','$contract_date')";
+
+        $sql_statement = "INSERT INTO stadiums (Stadium_Name) VALUES ('$stadium_name')";
+
+        $result = mysqli_query($db, $sql_statement);
+        echo "Your result is: " . $result;
+
+
+    } else if (!empty($_POST['contract_date'])) {
+
+        $contract_date = $_POST['contract_date'];
+
+
+
+        $sql_statement = "INSERT INTO transfers (Contract_Date) VALUES ('$contract_date')";
 
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;

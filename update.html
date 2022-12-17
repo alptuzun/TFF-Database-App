@@ -48,7 +48,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </select>
     </div>
     <div id="awards" style="display:block;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="award_season">Year of the Award</label>
             <input type="number" id="award_season" name="award_season">
@@ -58,7 +58,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="clubs" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="club_name">Full Name of the Club</label>
             <input type="text" id="club_name" name="club_name">
@@ -73,7 +73,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="club_managers" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="club_managers_manager_id">Manager ID</label>
             <input type="number" id="club_managers_manager_id" name="club_managers_manager_id">
@@ -89,7 +89,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="club_owns" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="club_owns_stadium_id">Stadium ID</label>
             <input type="number" id="club_owns_stadium_id" name="club_owns_stadium_id">
@@ -105,7 +105,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="club_roster" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="club_roster_club_id">Club ID</label>
             <input type="number" id="club_roster_club_id" name="club_roster_club_id">
@@ -118,7 +118,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="club_transfers" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="club_transfers_transfer_id">Transfer ID</label>
             <input type="number" id="club_transfers_transfer_id" name="club_transfers_transfer_id">
@@ -139,7 +139,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="cups" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="cups_last_champion">Last Champion</label>
             <input type="text" id="cups_last_champion" name="cups_last_champion">
@@ -152,7 +152,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="cup_champions" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="cup_champions_cup_id">Cup ID</label>
             <input type="number" id="cup_champions_cup_id" name="cup_champions_cup_id">
@@ -168,9 +168,9 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="leagues" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
-            <label for="league_name">Club ID</label>
+            <label for="league_name">League Name</label>
             <input type="text" id="league_name" name="league_name">
 
             <label for="team_count">Number of Teams</label>
@@ -187,7 +187,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="league_roster" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="league_roster_league_id">League ID</label>
             <input type="number" id="league_roster_league_id" name="league_roster_league_id">
@@ -196,14 +196,14 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
             <input type="number" id="league_roster_club_id" name="league_roster_club_id">
 
             <label for="league_roster_league_name">League Name</label>
-            <input type="text" id="league_roster_league_name" name="lasleague_roster_league_namet_champion">
+            <input type="text" id="league_roster_league_name" name="league_roster_league_name">
 
             <input type="submit" name="submit"
                 style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
         </form>
     </div>
     <div id="manager" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="manager_full_name">Manager Name</label>
             <input type="text" id="manager_full_name" name="manager_full_name">
@@ -216,7 +216,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="manager_awards" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="manager_award_award_id">Award ID</label>
             <input type="number" id="manager_award_award_id" name="manager_award_award_id">
@@ -235,7 +235,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="match" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="host_id">Host ID</label>
             <input type="number" id="host_id" name="host_id">
@@ -257,7 +257,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="penalty" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="penalty_type">Penalty Type</label>
             <input type="text" id="penalty_type" name="penalty_type">
@@ -291,7 +291,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="player_awards" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="player_awards_award_id">Award ID</label>
             <input type="number" id="player_awards_award_id" name="player_awards_award_id">
@@ -310,7 +310,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="punished_players" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="punished_players_penalty_id">Penalty ID</label>
             <input type="number" id="punished_players_penalty_id" name="punished_players_penalty_id">
@@ -323,7 +323,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="referees" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="referees_experience">Years of Experience</label>
             <input type="range" name="referees_experience" id="referees_experience" value="0" min="0" max="50"
@@ -338,7 +338,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="stadiums" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="stadium_name">Stadium Name</label>
             <input type="text" id="stadium_name" name="stadium_name">
@@ -348,7 +348,7 @@ background-repeat: no-repeat; background-size:10%; background-position:75%; back
         </form>
     </div>
     <div id="transfers" style="display:none;">
-        <form action="insertplayers.php" method="POST" id="search_querry" enctype="multipart/form-data">
+        <form action="insert.php" method="POST" id="search_querry" enctype="multipart/form-data">
 
             <label for="contract_date">Contract Date</label>
             <input type="datetime-local" id="contract_date" name="contract_date">

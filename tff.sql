@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 10:09 AM
+-- Generation Time: Dec 17, 2022 at 03:25 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -237,9 +237,9 @@ INSERT INTO `cup_champions` (`Cup_ID`, `Club_ID`, `Season`) VALUES
 
 CREATE TABLE `leagues` (
   `League_ID` int(11) NOT NULL,
-  `Name` varchar(50) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
+  `League_Name` varchar(50) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
   `Team_Count` int(11) DEFAULT NULL,
-  `Last Champion` varchar(50) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
+  `Last_Champion` varchar(50) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
   `Prize_Money` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
@@ -247,7 +247,7 @@ CREATE TABLE `leagues` (
 -- Dumping data for table `leagues`
 --
 
-INSERT INTO `leagues` (`League_ID`, `Name`, `Team_Count`, `Last Champion`, `Prize_Money`) VALUES
+INSERT INTO `leagues` (`League_ID`, `League_Name`, `Team_Count`, `Last_Champion`, `Prize_Money`) VALUES
 (1, 'Spor Toto Süper Lig', 20, 'Trabzonspor', 65340000),
 (2, 'Spor Toto 1.Lig', 19, 'MKE Ankaragücü', 4000000),
 (3, 'TFF 2. Lig', 19, 'Sakaryaspor', 5000000);
@@ -411,7 +411,10 @@ INSERT INTO `players` (`player_id`, `full_name`, `goal_count`, `age`, `birth_pla
 (10, 'Ferdi Erenay Kadıoğlu', 15, 23, 'Arnhem'),
 (11, 'Omer Tugrul', 69, 30, 'Kayseri'),
 (12, 'Ali Devrim', 78, 26, 'Mimaroba'),
-(13, 'Alex De Souza', 250, 45, 'Curitiba');
+(13, 'Alex De Souza', 250, 45, 'Curitiba'),
+(14, 'Diego Maradona', 777, 50, 'Buenos Aires'),
+(15, 'Diego Costa', 274, 35, 'Madrid'),
+(16, 'Volkan Demirel', 5, 40, 'Sinanoba');
 
 -- --------------------------------------------------------
 
@@ -739,7 +742,7 @@ ALTER TABLE `penalty`
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `referees`

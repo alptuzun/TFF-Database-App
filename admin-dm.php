@@ -1,7 +1,7 @@
 <?php
 
 
-include "config-dm.php";
+include "config.php";
 
 ?>
 
