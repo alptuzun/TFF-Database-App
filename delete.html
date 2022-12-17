@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete from Database</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css" />
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="/js/validation.js" defer></script>
+    <link rel="icon" href="https://cdn.worldvectorlogo.com/logos/tff-tuerkiye-futbol-federasyonu.svg">
+</head>
+
+<script>
+    function reset_options() {
+        document.getElementById("dropdown_delete").options.length = 0;
+        return true;
+    }
+</script>
+
+<body style="background-color: rgb(229, 172, 157);background-image: url(https://www.tff.org/Resources/TFF/Images/0000000015/TFF/TFF-Logolar/Orjinal/tff01.png);
+background-repeat: no-repeat; background-size:10%; background-position:75%; background-attachment: fixed;"
+    onbeforeunload="reset_options()">
+    <div>
+        <h3>Please select the table first.</h3>
+        <select id="dropdown_delete" onchange="admSelectCheck(this);">
+            <option value="awards" id="1">Awards</option>
+            <option value="clubs" id="2">Clubs</option>
+            <option value="club_managers" id="3">Club Managers</option>
+            <option value="club_owns" id="4">Club Stadiums</option>
+            <option value="club_roster" id="5">Club Rosters</option>
+            <option value="club_transfers" id="6">Club Transfers</option>
+            <option value="cups" id="7">Cups</option>
+            <option value="cup_champions" id="8">Cup Champions</option>
+            <option value="leagues" id="9">Leagues</option>
+            <option value="league_roster" id="10">League Roster</option>
+            <option value="manager" id="11">Managers</option>
+            <option value="manager_awards" id="12">Manager Awards</option>
+            <option value="match" id="13">Matches</option>
+            <option value="penalty" id="14">Penalties</option>
+            <option value="players" id="15">Players</option>
+            <option value="player_awards" id="16">Player Awards</option>
+            <option value="punished_players" id="17">Punished Players</option>
+            <option value="referees" id="18">Referees</option>
+            <option value="stadiums" id="19">Stadiums</option>
+            <option value="transfers" id="20">Transfers</option>
+        </select>
+    </div>
+    <div id="awards" style="display:block;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="award_id">Award ID</label>
+            <input type="number" id="award_id" name="award_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="clubs" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="club_id">Club ID</label>
+            <input type="number" id="club_id" name="club_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_managers" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="club_managers_manager_id">Manager ID</label>
+            <input type="number" id="club_managers_manager_id" name="club_managers_manager_id">
+
+            <label for="club_managers_club_id">Club ID</label>
+            <input type="number" id="club_managers_club_id" name="club_managers_club_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_owns" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="club_owns_stadium_id">Stadium ID</label>
+            <input type="number" id="club_owns_stadium_id" name="club_owns_stadium_id">
+
+            <label for="club_owns_club_id">Club ID</label>
+            <input type="number" id="club_owns_club_id" name="club_owns_club_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_roster" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="club_roster_club_id">Club ID</label>
+            <input type="number" id="club_roster_club_id" name="club_roster_club_id">
+
+            <label for="club_roster_player_id">Player ID</label>
+            <input type="number" id="club_roster_player_id" name="club_roster_player_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_transfers" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="club_transfers_transfer_id">Transfer ID</label>
+            <input type="number" id="club_transfers_transfer_id" name="club_transfers_transfer_id">
+
+            <label for="club_transfers_club_id">Club ID</label>
+            <input type="number" id="club_transfers_club_id" name="club_transfers_club_id">
+
+            <label for="club_transfers_player_id">Player ID</label>
+            <input type="number" id="club_transfers_player_id" name="club_transfers_player_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="cups" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="cup_id">Cup ID</label>
+            <input type="number" id="cup_id" name="cup_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="cup_champions" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="cup_champions_cup_id">Cup ID</label>
+            <input type="number" id="cup_champions_cup_id" name="cup_champions_cup_id">
+
+            <label for="cup_champions_club_id">Club ID</label>
+            <input type="number" id="cup_champions_club_id" name="cup_champions_club_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="leagues" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="league_id">League ID</label>
+            <input type="number" id="league_id" name="league_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="league_roster" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="league_roster_league_id">League ID</label>
+            <input type="number" id="league_roster_league_id" name="league_roster_league_id">
+
+            <label for="league_roster_club_id">Club ID</label>
+            <input type="number" id="league_roster_club_id" name="league_roster_club_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="manager" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="manager_id">Manager Name</label>
+            <input type="number" id="manager_id" name="manager_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="manager_awards" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="manager_award_award_id">Award ID</label>
+            <input type="number" id="manager_award_award_id" name="manager_award_award_id">
+
+            <label for="manager_award_manager_id">Manager ID</label>
+            <input type="number" id="manager_award_manager_id" name="manager_award_manager_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="match" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="match_id">Match ID</label>
+            <input type="number" id="match_id" name="match_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="penalty" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="penalty_id">Penalty ID</label>
+            <input type="number" id="penalty_id" name="penalty_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="players" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="player_id">Player ID</label>
+            <input type="number" id="player_id" name="player_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="player_awards" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="player_awards_award_id">Award ID</label>
+            <input type="number" id="player_awards_award_id" name="player_awards_award_id">
+
+            <label for="player_awards_player_id">Player ID</label>
+            <input type="number" id="player_awards_player_id" name="player_awards_player_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="punished_players" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="punished_players_penalty_id">Penalty ID</label>
+            <input type="number" id="punished_players_penalty_id" name="punished_players_penalty_id">
+
+            <label for="punished_players_player_id">Player ID</label>
+            <input type="number" id="punished_players_player_id" name="punished_players_player_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="referees" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="referee_id">Referee ID</label>
+            <input type="number" id="referee_id" name="referee_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="stadiums" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="stadium_id">Stadium ID</label>
+            <input type="text" id="stadium_id" name="stadium_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="transfers" style="display:none;">
+        <form action="delete.php" method="POST" id="delete" enctype="multipart/form-data">
+
+            <label for="transfer_id">Transfer ID</label>
+            <input type="number" id="transfer_id" name="transfer_id">
+
+            <input type="submit" name="submit" value="Delete"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <script>
+        function admSelectCheck(obj) {
+
+            var nameSelect = obj.value;
+            if (nameSelect) {
+                var divs = document.getElementsByTagName('div');
+                for (var i = 1; i < divs.length; i++) {
+                    divs[i].style.display = "none";
+                }
+                document.getElementById(nameSelect).style.display = "block";
+            }
+        }
+    </script>
+</body>
+
+</html>
