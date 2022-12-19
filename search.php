@@ -562,18 +562,19 @@ if (isset($_GET['awards_form'])) {
 
 } else if (isset($_GET['transfers_form'])) {
 
-    /*
-    echo $_GET['lower_contract_date'] . "\n";
-    echo $_GET['higher_contract_date'] . "\n";
-    */
+    $lowerDate = !empty($_GET['lower_contract_date']) ? $_GET['lower_contract_date'] : date('Y-m-d\TH:i', strtotime('1950-01-01 00:00'));
+    $higherDate = !empty($_GET['higher_contract_date']) ? $_GET['higher_contract_date'] : date('Y-m-d\TH:i', strtotime('2030-01-01 00:00'));
 
-    $lowerDate = !empty($_GET['lower_contract_date']) ? $_GET['lower_contract_date'] : date('Y-m-d\TH:i', strtotime('2030-01-01 00:00'));
-    $higherDate = !empty($_GET['higher_contract_date']) ? $_GET['higher_contract_date'] : date('Y-m-d\TH:i', strtotime('1950-01-01 00:00'));
+    $lowerDate = DateTime::createFromFormat('Y-m-d\TH:i', $lowerDate);
+    $higherDate = DateTime::createFromFormat('Y-m-d\TH:i', $higherDate);
+
+    $lowerDateString = $lowerDate->format('Y-m-d\TH:i');
+    $higherDateString = $higherDate->format('Y-m-d\TH:i');
 
     // date_create('31 Oct 1950 4:45am') date_create('31 Oct 2030 4:45am')
 
     if ($higherDate >= $lowerDate) {
-        $sql_statement = "SELECT * FROM transfers WHERE $lowerDate <= Contract_Date AND $higherDate >= Contract_Date";
+        $sql_statement = "SELECT * FROM transfers WHERE '$lowerDateString' <= Contract_Date AND '$higherDateString' >= Contract_Date";
         $result = mysqli_query($db, $sql_statement);
         if (mysqli_num_rows($result) > 0) {
             // Start the table
