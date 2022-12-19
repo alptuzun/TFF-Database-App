@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="tr">
+<style>
+
+</style>
+
+<head>
+    <title>Search from Database</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css" />
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="/js/validation.js" defer></script>
+    <link rel="icon" href="https://cdn.worldvectorlogo.com/logos/tff-tuerkiye-futbol-federasyonu.svg">
+</head>
+
+<script>
+    function reset_options(){
+        document.getElementById("dropdown_add").options.length = 0;
+        return true;
+    }
+</script>
+
+<body style="background-color: rgb(229, 172, 157);background-image: url(https://www.tff.org/Resources/TFF/Images/0000000015/TFF/TFF-Logolar/Orjinal/tff01.png);
+background-repeat: no-repeat; background-size:10%; background-position:75%; background-attachment: fixed;" onbeforeunload="reset_options()">
+    <div>
+        <h3>Please select the table first.</h3>
+        <select id="dropdown_add" onchange="admSelectCheck(this);">
+            <option value="awards" id="1">Awards</option>
+            <option value="clubs" id="2">Clubs</option>
+            <option value="club_managers" id="3">Club Managers</option>
+            <option value="club_owns" id="4">Club Stadiums</option>
+            <option value="club_roster" id="5">Club Rosters</option>
+            <option value="club_transfers" id="6">Club Transfers</option>
+            <option value="cups" id="7">Cups</option>
+            <option value="cup_champions" id="8">Cup Champions</option>
+            <option value="leagues" id="9">Leagues</option>
+            <option value="league_roster" id="10">League Roster</option>
+            <option value="manager" id="11">Managers</option>
+            <option value="manager_awards" id="12">Manager Awards</option>
+            <option value="match" id="13">Matches</option>
+            <option value="penalty" id="14">Penalties</option>
+            <option value="players" id="15">Players</option>
+            <option value="player_awards" id="16">Player Awards</option>
+            <option value="punished_players" id="17">Punished Players</option>
+            <option value="referees" id="18">Referees</option>
+            <option value="stadiums" id="19">Stadiums</option>
+            <option value="transfers" id="20">Transfers</option>
+        </select>
+    </div>
+    <div id="awards" style="display:block;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="lower_award_season">Lower Bound of the Season of the Award</label>
+            <input type="number" id="lower_award_season" name="lower_award_season">
+
+            <label for="higher_award_season">Higher Bound of the Season of the Award</label>
+            <input type="number" id="higher_award_season" name="higher_award_season">
+
+            <input type ="hidden" id="awards_form" name="awards_form" value="awards_form">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="clubs" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="club_name">Full Name of the Club</label>
+            <input type="text" id="club_name" name="club_name">
+
+            <label for="lower_championship_count">Lower Championship No.</label>
+            <input type="number" id="lower_championship_count" name="lower_championship_count">
+
+            <label for="higher_championship_count">Higher Championship No.</label>
+            <input type="number" id="higher_championship_count" name="higher_championship_count">
+
+            <input type ="hidden" id="clubs_form" name="clubs_form" value="clubs_form">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_managers" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="club_managers_manager_full_name">Manager Full Name</label>
+            <input type="text" id="club_managers_manager_full_name" name="club_managers_manager_full_name">
+
+            <label for="lower_club_managers_manager_experience_years">Manager Lower Experience Years</label>
+            <input type="number" id="lower_club_managers_manager_experience_years" name="lower_club_managers_manager_experience_years">
+
+            <label for="higher_club_managers_manager_experience_years">Manager Higher Experience Years</label>
+            <input type="number" id="higher_club_managers_manager_experience_years" name="higher_club_managers_manager_experience_years">
+            
+            <label for="club_managers_club_full_name">Club Full Name</label>
+            <input type="text" id="club_managers_club_full_name" name="club_managers_club_full_name">
+
+            <label for="lower_club_managers_club_championship_count">Club Lower Championship Count</label>
+            <input type="number" id="lower_club_managers_club_championship_count" name="lower_club_managers_club_championship_count">
+
+            <label for="higher_club_managers_club_championship_count">Club Higher Championship Count</label>
+            <input type="number" id="higher_club_managers_club_championship_count" name="higher_club_managers_club_championship_count">
+
+            <input type ="hidden" id="club_managers_form" name="club_managers_form" value="club_managers_form">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_owns" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="club_owns_stadium_name">Stadium Name</label>
+            <input type="text" id="club_owns_stadium_name" name="club_owns_stadium_name">
+
+            <label for="club_owns_club_name">Club Name</label>
+            <input type="text" id="club_owns_club_name" name="club_owns_club_name">
+
+            <label for="lower_club_owns_club_championship_count">Club Lower Championship Count</label>
+            <input type="number" id="lower_club_owns_club_championship_count" name="lower_club_owns_club_championship_count">
+
+            <label for="higher_club_owns_club_championship_count">Club Higher Championship Count</label>
+            <input type="number" id="higher_club_owns_club_championship_count" name="higher_club_owns_club_championship_count">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_roster" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="club_roster_club_name">Club Name</label>
+            <input type="text" id="club_roster_club_name" name="club_roster_club_name">
+
+            <label for="lower_club_roster_club_championship_count">Club Lower Championship Count</label>
+            <input type="number" id="lower_club_roster_club_championship_count" name="lower_club_roster_club_championship_count">
+
+            <label for="higher_club_roster_club_championship_count">Club Higher Championship Count</label>
+            <input type="number" id="higher_club_roster_club_championship_count" name="higher_club_roster_club_championship_count">
+
+            <label for="club_roster_player_name">Player Name</label>
+            <input type="text" id="club_roster_player_id" name="club_roster_player_id">
+
+            <label for="lower_club_roster_player_goal_count">Player Lower Goal Count</label>
+            <input type="number" id="lower_club_roster_player_goal_count" name="lower_club_roster_player_goal_count">
+
+            <label for="higher_club_roster_player_goal_count">Player Higher Goal Count</label>
+            <input type="number" id="higher_club_roster_player_goal_count" name="higher_club_roster_player_goal_count">
+
+            <label for="lower_club_roster_player_age">Player Lower Age</label>
+            <input type="number" id="lower_club_roster_player_age" name="lower_club_roster_player_age">
+
+            <label for="higher_club_roster_player_age">Player Higher Age</label>
+            <input type="number" id="higher_club_roster_player_age" name="higher_club_roster_player_age">
+
+            <label for="club_roster_player_birth_place">Player Birth Place</label>
+            <input type="text" id="club_roster_player_birth_place" name="club_roster_player_birth_place">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="club_transfers" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="lower_club_transfers_transfer_date">Transfer Lower Date</label>
+            <input type="datetime-local" id="lower_club_transfers_transfer_date" name="lower_club_transfers_transfer_date">
+
+            <label for="higher_club_transfers_transfer_date">Transfer Higher Date</label>
+            <input type="datetime-local" id="higher_club_transfers_transfer_date" name="higher_club_transfers_transfer_date">
+
+            <label for="club_transfers_club_name">Club Name</label>
+            <input type="text" id="club_transfers_club_name" name="club_transfers_club_name">
+
+            <label for="club_transfers_player_full_name">Player Full Name</label>
+            <input type="text" id="club_transfers_player_full_name" name="club_transfers_player_full_name">
+
+            <label for="lower_club_transfers_player_goal_count">Player Lower Goal Count</label>
+            <input type="number" id="lower_club_transfers_player_goal_count" name="lower_club_transfers_player_goal_count">
+
+            <label for="higher_club_transfers_player_goal_count">Player Higher Goal Count</label>
+            <input type="number" id="higher_club_transfers_player_goal_count" name="higher_club_transfers_player_goal_count">
+
+            <label for="lower_club_transfers_player_age">Player Lower Age</label>
+            <input type="number" id="lower_club_transfers_player_age" name="lower_club_transfers_player_age">
+
+            <label for="higher_club_transfers_player_age">Player Higher Age</label>
+            <input type="number" id="higher_club_transfers_player_age" name="higher_club_transfers_player_age">
+
+            <label for="club_transfers_player_birth_place">Player Birth Place</label>
+            <input type="text" id="club_transfers_player_birth_place" name="club_transfers_player_birth_place">
+
+            <label for="lower_club_transfers_season_number">Lower Season No.</label>
+            <input type="number" id="lower_club_transfers_season_number" name="lower_club_transfers_season_number">
+
+            <label for="higher_club_transfers_season_number">Higher Season No.</label>
+            <input type="number" id="higher_club_transfers_season_number" name="higher_club_transfers_season_number">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="cups" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="cups_last_champion">Last Champion</label>
+            <input type="text" id="cups_last_champion" name="cups_last_champion">
+
+            <label for="cup_name">Cup Name</label>
+            <input type="text" id="cup_name" name="cup_name">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="cup_champions" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="cup_champions_cup_name">Cup Name</label>
+            <input type="text" id="cup_champions_cup_name" name="cup_champions_cup_name">
+
+            <label for="cup_champions_club_name">Club Name</label>
+            <input type="text" id="cup_champions_club_name" name="cup_champions_club_name">
+
+            <label for="lower_cup_champions_club_championship_count">Club Lower Championship Count</label>
+            <input type="number" id="lower_cup_champions_club_championship_count" name="lower_cup_champions_club_championship_count">
+
+            <label for="higher_cup_champions_club_championship_count">Club Higher Championship Count</label>
+            <input type="number" id="higher_cup_champions_club_championship_count" name="higher_cup_champions_club_championship_count">
+
+            <label for="lower_cup_champions_season">Lower Season (YYYY)</label>
+            <input type="number" id="lower_cup_champions_season" name="lower_cup_champions_season">
+
+            <label for="higher_cup_champions_season">Higher Season (YYYY)</label>
+            <input type="number" id="higher_cup_champions_season" name="higher_cup_champions_season">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="leagues" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="league_name">League Name</label>
+            <input type="text" id="league_name" name="league_name">
+
+            <label for="lower_team_count">Lower Number of Teams</label>
+            <input type="number" id="lower_team_count" name="lower_team_count">
+
+            <label for="higher_team_count">Higher Number of Teams</label>
+            <input type="number" id="higher_team_count" name="higher_team_count">
+
+            <label for="last_champion">Last Champion</label>
+            <input type="text" id="last_champion" name="last_champion">
+
+            <label for="lower_prize_money">Lower Prize Money</label>
+            <input type="number" id="lower_prize_money" name="lower_prize_money">
+
+            <label for="higher_prize_money">Higher Prize Money</label>
+            <input type="number" id="higher_prize_money" name="higher_prize_money">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="league_roster" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="league_roster_league_name">League Name</label>
+            <input type="text" id="league_roster_league_name" name="league_roster_league_name">
+
+            <label for="lower_league_roster_league_team_count">Lower Number of Teams</label>
+            <input type="number" id="lower_league_roster_league_team_count" name="lower_league_roster_league_team_count">
+
+            <label for="higher_league_roster_league_team_count">Higher Number of Teams</label>
+            <input type="number" id="higher_league_roster_league_team_count" name="higher_league_roster_league_team_count">
+
+            <label for="league_roster_last_champion">Last Champion</label>
+            <input type="text" id="league_roster_last_champion" name="league_roster_last_champion">
+
+            <label for="lower_league_roster_league_prize_money">Lower Prize Money</label>
+            <input type="number" id="lower_league_roster_league_prize_money" name="lower_league_roster_league_prize_money">
+
+            <label for="higher_league_roster_league_prize_money">Higher Prize Money</label>
+            <input type="number" id="higher_league_roster_league_prize_money" name="higher_league_roster_league_prize_money">
+
+            <label for="league_roster_club_name">Club Name</label>
+            <input type="text" id="cup_champions_club_name" name="cup_champions_club_name">
+
+            <label for="lower_league_roster_club_championship_count">Club Lower Championship Count</label>
+            <input type="number" id="lower_league_roster_club_championship_count" name="lower_league_roster_club_championship_count">
+
+            <label for="higher_league_roster_club_championship_count">Club Higher Championship Count</label>
+            <input type="number" id="higher_league_roster_club_championship_count" name="higher_league_roster_club_championship_count">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="manager" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="manager_full_name">Manager Name</label>
+            <input type="text" id="manager_full_name" name="manager_full_name">
+
+            <label for="lower_experience_years">Lower Years of Experience</label>
+            <input type="number" id="lower_experience_years" name="lower_experience_years">
+
+            <label for="higher_experience_years">Higher Years of Experience</label>
+            <input type="number" id="higher_experience_years" name="higher_experience_years">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="manager_awards" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="manager_award_manager_full_name">Manager Name</label>
+            <input type="text" id="manager_award_manager_full_name" name="manager_award_manager_full_name">
+
+            <label for="lower_manager_award_experience_years">Lower Years of Experience</label>
+            <input type="number" id="lower_manager_award_experience_years" name="lower_manager_award_experience_years">
+
+            <label for="higher_manager_award_experience_years">Higher Years of Experience</label>
+            <input type="number" id="higher_manager_award_experience_years" name="higher_manager_award_experience_years">
+
+            <label for="lower_manager_award_season">Lower Season</label>
+            <input type="number" id="lower_manager_award_season" name="lower_manager_award_season">
+
+            <label for="higher_manager_award_season">Higher Season</label>
+            <input type="number" id="higher_manager_award_season" name="higher_manager_award_season">
+
+            <label for="manager_award_award_type">Award Type</label>
+            <input type="text" id="manager_award_award_type" name="manager_award_award_type">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="match" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="host_club_name">Host Club Name</label>
+            <input type="text" id="host_club_name" name="host_club_name">
+
+            <label for="guest_club_name">Guest Club Name</label>
+            <input type="text" id="guest_club_name" name="guest_club_name">
+
+            <label for="match_referee_name">Referee Name</label>
+            <input type="text" id="match_referee_name" name="match_referee_name">
+
+            <label for="match_score">Match Score (H-G)</label>
+            <input type="text" id="match_score" name="match_score">
+
+            <label for="lower_match_datetime">Lower Match Date & Time</label>
+            <input type="datetime-local" id="lower_match_datetime" name="lower_match_datetime">
+
+            <label for="higher_match_datetime">Higher Match Date & Time</label>
+            <input type="datetime-local" id="higher_match_datetime" name="higher_match_datetime">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="penalty" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="penalty_type">Penalty Type</label>
+            <input type="text" id="penalty_type" name="penalty_type">
+
+            <label for="lower_penalty_length">lower Penalty Length</label>
+            <input type="number" id="lower_penalty_length" name="lower_penalty_length">
+
+            <label for="higher_penalty_length">Higher Penalty Length</label>
+            <input type="number" id="higher_penalty_length" name="higher_penalty_length">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="players" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="full_name">Full Name of the Player</label>
+            <input type="text" id="full_name" name="full_name">
+
+            <label for="lower_goal_count">Lower Current Goal Count</label>
+            <input type="number" id="lower_goal_count" name="lower_goal_count">
+
+            <label for="higher_goal_count">Higher Current Goal Count</label>
+            <input type="number" id="higher_goal_count" name="higher_goal_count">
+
+            <label for="lower_age">Lower Age</label>
+            <input type="number" id="lower_age" name="lower_age">
+
+            <label for="higher_age">Higher Age</label>
+            <input type="number" id="higher_age" name="higher_age">
+
+            <label for="birth_place">Birth Place</label>
+            <input type="text" id="birth_place" name="birth_place">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="player_awards" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="player_awards_player_full_name">Full Name of the Player</label>
+            <input type="text" id="player_awards_player_full_name" name="player_awards_player_full_name">
+
+            <label for="lower_player_awards_player_goal_count">Lower Current Goal Count</label>
+            <input type="number" id="lower_player_awards_player_goal_count" name="lower_player_awards_player_goal_count">
+
+            <label for="higher_player_awards_player_goal_count">Higher Current Goal Count</label>
+            <input type="number" id="higher_player_awards_player_goal_count" name="higher_player_awards_player_goal_count">
+
+            <label for="lower_player_awards_player_age">Lower Age</label>
+            <input type="number" id="lower_player_awards_player_age" name="lower_player_awards_player_age">
+
+            <label for="higher_player_awards_player_age">Higher Age</label>
+            <input type="number" id="higher_player_awards_player_age" name="higher_player_awards_player_age">
+
+            <label for="player_awards_player_birth_place">Birth Place</label>
+            <input type="text" id="player_awards_player_birth_place" name="player_awards_player_birth_place">
+
+            <label for="player_awards_season">Season</label>
+            <input type="number" id="player_awards_season" name="player_awards_season">
+
+            <label for="player_awards_awards_type">Award Type</label>
+            <input type="text" id="player_awards_awards_type" name="player_awards_awards_type">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="punished_players" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="punished_players_penalty_type">Penalty Type</label>
+            <input type="text" id="punished_players_penalty_type" name="punished_players_penalty_type">
+
+            <label for="lower_punished_players_penalty_length">Lower Penalty Length</label>
+            <input type="number" id="lower_punished_players_penalty_length" name="lower_punished_players_penalty_length">
+
+            <label for="higher_punished_players_penalty_length">Higher Penalty Length</label>
+            <input type="number" id="higher_punished_players_penalty_length" name="higher_punished_players_penalty_length">
+
+            <label for="punished_players_player_full_name">Full Name of the Player</label>
+            <input type="text" id="punished_players_player_full_name" name="punished_players_player_full_name">
+
+            <label for="lower_punished_players_player_goal_count">Lower Current Goal Count</label>
+            <input type="number" id="lower_punished_players_player_goal_count" name="lower_punished_players_player_goal_count">
+
+            <label for="higher_punished_players_player_goal_count">Higher Current Goal Count</label>
+            <input type="number" id="higher_punished_players_player_goal_count" name="higher_punished_players_player_goal_count">
+
+            <label for="lower_punished_players_player_age">Lower Age</label>
+            <input type="number" id="lower_punished_players_player_age" name="lower_punished_players_player_age">
+
+            <label for="higher_punished_players_player_age">Higher Age</label>
+            <input type="number" id="higher_punished_players_player_age" name="higher_punished_players_player_age">
+
+            <label for="punished_players_player_birth_place">Birth Place</label>
+            <input type="text" id="punished_players_player_birth_place" name="punished_players_player_birth_place">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="referees" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="lower_referees_experience">Lower Years of Experience</label>
+            <input type="number" id="lower_referees_experience" name="lower_referees_experience">
+
+            <label for="higher_referees_experience">Higher Years of Experience</label>
+            <input type="number" id="higher_referees_experience" name="higher_referees_experience">
+
+            <label for="referees_full_name">Referee Full Name</label>
+            <input type="text" id="referees_full_name" name="referees_full_name">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="stadiums" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="stadium_name">Stadium Name</label>
+            <input type="text" id="stadium_name" name="stadium_name">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <div id="transfers" style="display:none;">
+        <form action="search.php" method="get" id="search_querry" enctype="multipart/form-data">
+
+            <label for="lower_contract_date">Lower Contract Date</label>
+            <input type="datetime-local" id="lower_contract_date" name="lower_contract_date">
+
+            <label for="higher_contract_date">Higher Contract Date</label>
+            <input type="datetime-local" id="higher_contract_date" name="higher_contract_date">
+
+            <input type="submit" name="submit"
+                style="margin-top: 3%; color:  rgb(255, 255, 255); background-color: rgb(33, 150, 29);" />
+        </form>
+    </div>
+    <script>
+        function admSelectCheck(obj) {
+
+            var nameSelect = obj.value;
+            if (nameSelect) {
+                var divs = document.getElementsByTagName('div');
+                for (var i = 1; i < divs.length; i++) {
+                    divs[i].style.display = "none";
+                }
+                document.getElementById(nameSelect).style.display = "block";
+            }
+        }
+    </script>
+</body>
+
+</html>

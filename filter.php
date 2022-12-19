@@ -1,6 +1,6 @@
 <?php
 
-include "config-dm.php";
+include "config.php";
 
 if(isset($_GET['lower_age']) && isset($_GET['higher_age'])) {
     $int_1=$_GET['lower_age'];  // This variable is created for the numeric test 
