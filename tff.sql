@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2022 at 03:25 PM
+-- Generation Time: Dec 20, 2022 at 11:52 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -46,7 +46,7 @@ INSERT INTO `awards` (`Award_ID`, `Season`) VALUES
 (7, 2021),
 (8, 2021),
 (9, 2021),
-(10, 2021);
+(10, 2023);
 
 -- --------------------------------------------------------
 
@@ -110,8 +110,7 @@ INSERT INTO `club_managers` (`Manager_ID`, `Club_ID`, `Tenure`) VALUES
 (4, 6, '2022-'),
 (5, 19, '2020-'),
 (6, 18, '2019-'),
-(7, 12, '2021-'),
-(8, 5, '2022-');
+(7, 12, '2021-');
 
 -- --------------------------------------------------------
 
@@ -302,8 +301,7 @@ INSERT INTO `manager` (`Manager_ID`, `Full_Name`, `Experience_Years`) VALUES
 (4, 'Jorge Jesus', 32),
 (5, 'Abdullah Avcı', 22),
 (6, 'Rıza Çalımbay', 21),
-(7, 'Emre Belözoğlu', 2),
-(8, 'Andrea Pirlo', 2);
+(7, 'Emre Belözoğlu', 2);
 
 -- --------------------------------------------------------
 
@@ -348,13 +346,13 @@ CREATE TABLE `match` (
 --
 
 INSERT INTO `match` (`Match_ID`, `Host_ID`, `Guest_ID`, `Referee_ID`, `Score`, `Date_Time`) VALUES
-(1, 13, 19, 1, '0-2', '2022-08-05 21:04:00'),
+(1, 1, 21, 1, '0-2', '2022-09-07 21:54:15'),
 (2, 4, 15, 3, '1-0', '2022-08-06 21:48:00'),
 (3, 3, 7, 2, '0-1', '2022-08-07 21:47:00'),
 (4, 6, 20, 5, '3-3', '2022-08-08 21:48:00'),
 (5, 19, 11, 6, '1-0', '2022-12-12 21:02:00'),
-(6, 7, 9, 6, '0-1', '2022-08-13 21:46:00'),
-(7, 14, 6, 1, '0-6', '2022-08-15 21:45:00');
+(6, 2, 8, 5, '1-0', '2022-12-14 21:29:27'),
+(7, 5, 3, 3, '5-0', '2022-12-14 21:29:53');
 
 -- --------------------------------------------------------
 
@@ -438,8 +436,7 @@ INSERT INTO `player_awards` (`Award_ID`, `Player_ID`, `Season`, `Award_Type`) VA
 (2, 10, 2022, 'Yılın En Gelişen Oyuncusu'),
 (5, 9, 2022, 'Yılın En Golcü Oyuncusu'),
 (6, 7, 2021, 'Yılın En Değerli Oyuncusu'),
-(7, 11, 2021, 'Yılın En Gelişen Oyuncusu'),
-(10, 6, 2021, 'Yılın En Golcü Oyuncusu');
+(7, 11, 2021, 'Yılın En Gelişen Oyuncusu');
 
 -- --------------------------------------------------------
 
@@ -531,7 +528,8 @@ CREATE TABLE `transfers` (
 INSERT INTO `transfers` (`Transfer_ID`, `Contract_Date`) VALUES
 (1, '2022-12-01 10:30:00'),
 (2, '2022-12-01 18:40:00'),
-(3, '2022-12-03 23:50:30');
+(3, '2022-12-03 23:50:30'),
+(4, '2022-12-19 19:29:00');
 
 -- --------------------------------------------------------
 
@@ -724,13 +722,13 @@ ALTER TABLE `leagues`
 -- AUTO_INCREMENT for table `manager`
 --
 ALTER TABLE `manager`
-  MODIFY `Manager_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Manager_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `match`
 --
 ALTER TABLE `match`
-  MODIFY `Match_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Match_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `penalty`
@@ -760,7 +758,7 @@ ALTER TABLE `stadiums`
 -- AUTO_INCREMENT for table `transfers`
 --
 ALTER TABLE `transfers`
-  MODIFY `Transfer_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Transfer_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

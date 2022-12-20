@@ -198,7 +198,7 @@ if (
         $date_time = $_POST['match_datetime'];
 
 
-        $sql_statement = "INSERT INTO match (Host_ID, Guest_ID, Referee_ID, Score, Date_Time) VALUES ('$host_id','$guest_id','$referee_id','$score','$date_time')";
+        $sql_statement = "INSERT INTO `match` (Host_ID, Guest_ID, Referee_ID, Score, Date_Time) VALUES ('$host_id','$guest_id','$referee_id','$score','$date_time')";
 
         $result = mysqli_query($db, $sql_statement);
         echo "Your result is: " . $result;
