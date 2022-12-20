@@ -158,46 +158,157 @@ if (isset($_GET['awards_form'])) {
     }
 
 
-} else if (!empty($_POST['club_owns_stadium_id']) && !empty($_POST['club_owns_club_id']) && !empty($_POST['club_owns_stadium_name'])) {
+} else if (isset($_GET['club_owns_form'])) {
 
-    $stadium_id = $_POST['club_owns_stadium_id'];
-    $club_id = $_POST['club_owns_club_id'];
-    $stadium_name = $_POST['club_owns_stadium_name'];
+    $stadium_name = $_GET['club_owns_stadium_name'];
 
-
-
-    $sql_statement = "INSERT INTO club_owns (Stadium_ID, Club_ID, Stadium_Name) VALUES ('$stadium_id','$club_id','$stadium_name')";
-
-    $result = mysqli_query($db, $sql_statement);
-    echo "Your result is: " . $result;
+    $club_name = $_GET['club_owns_club_name'];
 
 
-} else if (!empty($_POST['club_roster_club_id']) && !empty($_POST['club_roster_player_id'])) {
+    $lower_championship = !empty($_GET['lower_club_owns_club_championship_count']) ? $_GET['lower_club_owns_club_championship_count'] : 0;
+    $higher_championship = !empty($_GET['higher_club_owns_club_championship_count']) ? $_GET['higher_club_owns_club_championship_count'] : 99999;
 
-    $club_id = $_POST['club_roster_club_id'];
-    $player_id = $_POST['club_roster_player_id'];
+    if (($lower_championship <= $higher_championship)) {
+        $sql_statement = "SELECT stadiums.Stadium_Name, stadiums.Stadium_ID, clubs.Club_ID, clubs.Club_Name, clubs.Championship_Count FROM stadiums NATURAL JOIN clubs NATURAL JOIN club_owns WHERE Stadium_Name LIKE '%$stadium_name%' AND Club_Name LIKE '%$club_name%' AND $lower_championship <= Championship_count AND $higher_championship >= Championship_count";
+        $result = mysqli_query($db, $sql_statement);
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table
+            echo "<table border='1'>";
+
+            // Print the table headers
+            $row = mysqli_fetch_assoc($result);
+            echo "<tr>";
+            foreach ($row as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            echo "</tr>";
+
+            // Print the table rows
+            mysqli_data_seek($result, 0); // Reset the result pointer to the beginning
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($row as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
+
+            // End the table
+            echo "</table>";
+        } else {
+            echo "No records found.";
+        }
+    } else {
+        echo ("Lower value cannot be higher than the higher value! Please enter again.");
+    }
+
+} else if (isset($_GET['club_roster_form'])) {
+
+    $club_name = $_GET['club_roster_club_name'];
+
+    $player_full_name = $_GET['club_roster_player_name'];
+
+    $lower_goal_count = !empty($_GET['lower_club_roster_player_goal_count']) ? $_GET['lower_club_roster_player_goal_count'] : 0;
+    $higher_goal_count = !empty($_GET['higher_club_roster_player_goal_count']) ? $_GET['higher_club_roster_player_goal_count'] : 99999;
+
+    $lower_player_age = !empty($_GET['lower_club_roster_player_age']) ? $_GET['lower_club_roster_player_age'] : 0;
+    $higher_player_age = !empty($_GET['higher_club_roster_player_age']) ? $_GET['higher_club_roster_player_age'] : 99999;
+
+    $player_birth_place = $_GET['club_roster_player_birth_place'];
+
+    $lower_championship = !empty($_GET['lower_club_roster_club_championship_count']) ? $_GET['lower_club_roster_club_championship_count'] : 0;
+    $higher_championship = !empty($_GET['higher_club_roster_club_championship_count']) ? $_GET['higher_club_roster_club_championship_count'] : 99999;
+
+    if (($lower_goal_count <= $higher_goal_count) && ($lower_player_age <= $higher_player_age) && ($lower_championship <= $higher_championship)) {
+        $sql_statement = "SELECT players.Player_ID, players.Full_Name, players.Goal_Count, players.Birth_Place, clubs.Club_ID, clubs.Club_Name, clubs.Championship_Count   FROM players NATURAL JOIN clubs NATURAL JOIN club_roster WHERE Birth_Place LIKE '%$player_birth_place%' AND Full_Name LIKE '%$player_full_name%' AND Club_Name LIKE '%$club_name%' AND $lower_championship <= Championship_count AND $higher_championship >= Championship_count";
+        $result = mysqli_query($db, $sql_statement);
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table
+            echo "<table border='1'>";
+
+            // Print the table headers
+            $row = mysqli_fetch_assoc($result);
+            echo "<tr>";
+            foreach ($row as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            echo "</tr>";
+
+            // Print the table rows
+            mysqli_data_seek($result, 0); // Reset the result pointer to the beginning
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($row as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
+
+            // End the table
+            echo "</table>";
+        } else {
+            echo "No records found.";
+        }
+    } else {
+        echo ("Lower value cannot be higher than the higher value! Please enter again.");
+    }
+
+} else if (isset($_GET['club_transfers_form'])) {
 
 
+    $club_name = $_GET['club_transfers_club_name'];
 
-    $sql_statement = "INSERT INTO club_roster (Club_ID, Player_ID) VALUES ('$club_id','$player_id')";
+    $player_full_name = $_GET['club_transfers_player_full_name'];
 
-    $result = mysqli_query($db, $sql_statement);
-    echo "Your result is: " . $result;
+    $lower_goal_count = !empty($_GET['lower_club_transfers_player_goal_count']) ? $_GET['lower_club_transfers_player_goal_count'] : 0;
+    $higher_goal_count = !empty($_GET['higher_club_transfers_player_goal_count']) ? $_GET['higher_club_transfers_player_goal_count'] : 99999;
 
+    $lower_player_age = !empty($_GET['lower_club_transfers_player_age']) ? $_GET['lower_club_transfers_player_age'] : 0;
+    $higher_player_age = !empty($_GET['higher_club_transfers_player_age']) ? $_GET['higher_club_transfers_player_age'] : 99999;
 
-} else if (!empty($_POST['club_transfers_transfer_id']) && !empty($_POST['club_transfers_club_id']) && !empty($_POST['club_transfers_player_id']) && !empty($_POST['club_transfers_season_number'])) {
+    $player_birth_place = $_GET['club_transfers_player_birth_place'];
 
-    $transfer_id = $_POST['club_transfers_transfer_id'];
-    $club_id = $_POST['club_transfers_club_id'];
-    $player_id = $_POST['club_transfers_player_id'];
-    $season_number = $_POST['club_transfers_season_number'];
+    $lower_season_number = !empty($_GET['lower_club_transfers_season_number']) ? $_GET['lower_club_transfers_season_number'] : 0;
+    $higher_season_number = !empty($_GET['higher_club_transfers_season_number']) ? $_GET['higher_club_transfers_season_number'] : 99999;
 
+    /*
+    $lower_championship = !empty($_GET['lower_club_transfers_club_championship_count']) ? $_GET['lower_club_transfers_club_championship_count'] : 0;
+    $higher_championship = !empty($_GET['higher_club_transfers_club_championship_count']) ? $_GET['higher_club_transfers_club_championship_count'] : 99999;
+    */
 
-    $sql_statement = "INSERT INTO club_transfers (Transfer_ID, Club_ID, Player_ID, Season_Number) VALUES ('$transfer_id','$club_id','$player_id','$season_number')";
+    if (($lower_goal_count <= $higher_goal_count) && ($lower_player_age <= $higher_player_age) && ($lower_season_number <= $higher_season_number)) {
+        $sql_statement = "SELECT transfers.Transfer_ID, transfers.Contract_Date, club_transfers.Season_Number, clubs.Club_ID, clubs.Club_Name, clubs.Championship_Count, players.player_ID, players.full_name, players.goal_count, players.age, players.birth_place FROM transfers NATURAL JOIN clubs NATURAL JOIN club_transfers NATURAL JOIN players WHERE Club_Name LIKE '%$club_name%' AND full_name LIKE '%$player_full_name%' AND $lower_goal_count <= goal_count AND $higher_goal_count >= goal_count AND $lower_player_age <= age AND $higher_player_age >= age AND birth_place LIKE '%$player_birth_place%' AND $lower_season_number <= Season_Number AND $higher_season_number >= Season_Number";
+        $result = mysqli_query($db, $sql_statement);
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table
+            echo "<table border='1'>";
 
-    $result = mysqli_query($db, $sql_statement);
-    echo "Your result is: " . $result;
+            // Print the table headers
+            $row = mysqli_fetch_assoc($result);
+            echo "<tr>";
+            foreach ($row as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            echo "</tr>";
 
+            // Print the table rows
+            mysqli_data_seek($result, 0); // Reset the result pointer to the beginning
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($row as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
+
+            // End the table
+            echo "</table>";
+        } else {
+            echo "No records found.";
+        }
+    } else {
+        echo ("Lower value cannot be higher than the higher value! Please enter again.");
+    }
 
 } else if (!empty($_POST['cups_last_champion']) && !empty($_POST['cup_name'])) {
 
@@ -212,18 +323,52 @@ if (isset($_GET['awards_form'])) {
     echo "Your result is: " . $result;
 
 
-} else if (!empty($_POST['cup_champions_cup_id']) && !empty($_POST['cup_champions_club_id']) && !empty($_POST['cup_champions_season'])) {
+} else if (isset($_GET['cup_champions_form'])) {
 
-    $cup_id = $_POST['cup_champions_cup_id'];
-    $club_id = $_POST['cup_champions_club_id'];
-    $season = $_POST['cup_champions_season'];
+    $cup_name = $_GET['cup_champions_cup_name'];
+
+    $club_name = $_GET['cup_champions_club_name'];
+
+    $lower_champion_season = !empty($_GET['lower_cup_champions_season']) ? $_GET['lower_cup_champions_season'] : 0;
+    $higher_champion_season = !empty($_GET['higher_cup_champions_season']) ? $_GET['higher_cup_champions_season'] : 99999;
 
 
-    $sql_statement = "INSERT INTO cups (Cup_ID, Club_ID, Season) VALUES ('$cup_id','$club_id','$season')";
+    $lower_championship = !empty($_GET['lower_cup_champions_club_championship_count']) ? $_GET['lower_cup_champions_club_championship_count'] : 0;
+    $higher_championship = !empty($_GET['higher_cup_champions_club_championship_count']) ? $_GET['higher_cup_champions_club_championship_count'] : 99999;
 
-    $result = mysqli_query($db, $sql_statement);
-    echo "Your result is: " . $result;
+    if (($lower_champion_season <= $higher_champion_season) && ($lower_championship <= $higher_championship)) {
+        $sql_statement = "SELECT cups.Cup_ID, cups.Cup_Name, clubs.Club_ID, clubs.Club_Name, clubs.Championship_Count   FROM cups NATURAL JOIN clubs NATURAL JOIN cup_champions WHERE Cup_Name LIKE '%$cup_name%' AND Club_Name LIKE '%$club_name%' AND $lower_championship <= Championship_count AND $higher_championship >= Championship_count";
+        $result = mysqli_query($db, $sql_statement);
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table
+            echo "<table border='1'>";
 
+            // Print the table headers
+            $row = mysqli_fetch_assoc($result);
+            echo "<tr>";
+            foreach ($row as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            echo "</tr>";
+
+            // Print the table rows
+            mysqli_data_seek($result, 0); // Reset the result pointer to the beginning
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($row as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
+
+            // End the table
+            echo "</table>";
+        } else {
+            echo "No records found.";
+        }
+    } else {
+        echo ("Lower value cannot be higher than the higher value! Please enter again.");
+    }
 
 } else if (isset($_GET['leagues_form'])) {
     $leagueName = $_GET['league_name'];
@@ -320,19 +465,54 @@ if (isset($_GET['awards_form'])) {
         echo ("Lower value cannot be higher than the higher value! Please enter again.");
     }
 
-} else if (!empty($_POST['manager_award_award_id']) && !empty($_POST['manager_award_manager_id']) && !empty($_POST['manager_award_season']) && !empty($_POST['manager_award_award_type'])) {
+} else if (isset($_GET['manager_awards_form'])) {
 
-    $award_id = $_POST['manager_award_award_id'];
-    $manager_id = $_POST['manager_award_manager_id'];
-    $season = $_POST['manager_award_season'];
-    $award_type = $_POST['manager_award_award_type'];
+    $manager_name = $_GET['manager_award_manager_full_name'];
 
+    $lower_experince = !empty($_GET['lower_manager_award_experience_years']) ? $_GET['lower_manager_award_experience_years'] : 0;
+    $higher_experience = !empty($_GET['higher_manager_award_experience_years']) ? $_GET['higher_manager_award_experience_years'] : 99999;
 
-    $sql_statement = "INSERT INTO manager_awards (Award_ID, Manager_ID, Season, Award_Type) VALUES ('$award_id', '$manager_id','$season','$award_type')";
+    $award_type = $_GET['manager_award_award_type'];
 
-    $result = mysqli_query($db, $sql_statement);
-    echo "Your result is: " . $result;
+    $lower_award_season = !empty($_GET['lower_manager_award_season']) ? $_GET['lower_manager_award_season'] : 0;
+    $higher_award_season = !empty($_GET['higher_manager_award_season']) ? $_GET['higher_manager_award_season'] : 99999999999;
 
+    if (($lower_experince <= $higher_experience) && ($lower_award_season <= $higher_award_season)) {
+
+        $sql_statement = "SELECT awards.Award_ID, awards.Season, manager.Manager_ID, manager.Full_Name, manager.Experience_Years, manager_awards.Season, manager_awards.Award_Type FROM awards NATURAL JOIN manager NATURAL JOIN manager_awards WHERE $lower_experince <= experience_years AND $higher_experience >= experience_years AND full_name LIKE '%$manager_name%' AND Award_Type LIKE '%$award_type%' AND $lower_award_season <= Season AND $higher_award_season >= Season";
+
+        $result = mysqli_query($db, $sql_statement);
+
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table
+            echo "<table border='1'>";
+
+            // Print the table headers
+            $row = mysqli_fetch_assoc($result);
+            echo "<tr>";
+            foreach ($row as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            echo "</tr>";
+
+            // Print the table rows
+            mysqli_data_seek($result, 0); // Reset the result pointer to the beginning
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($row as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
+
+            // End the table
+            echo "</table>";
+        } else {
+            echo "No records found.";
+        }
+    } else {
+        echo ("Lower value cannot be higher than the higher value! Please enter again.");
+    }
 
 } else if (isset($_GET['match_form'])) {
     $hostID = $_GET['host_club_id'];
@@ -457,32 +637,96 @@ if (isset($_GET['awards_form'])) {
         echo ("Lower value cannot be higher than the higher value! Please enter again.");
     }
 
-} else if (!empty($_POST['player_awards_award_id']) && !empty($_POST['player_awards_player_id']) && !empty($_POST['player_awards_season']) && !empty($_POST['player_awards_awards_type'])) {
-
-    $award_id = $_POST['player_awards_award_id'];
-    $player_id = $_POST['player_awards_player_id'];
-    $season = $_POST['player_awards_season'];
-    $award_type = $_POST['player_awards_awards_type'];
-
-
-    $sql_statement = "INSERT INTO player_awards (Award_ID, Player_ID, Season, Award_Type) VALUES ('$award_id', '$player_id','$season','$award_type')";
-
-    $result = mysqli_query($db, $sql_statement);
-    echo "Your result is: " . $result;
+} else if (isset($_GET['player_awards_form'])) {
+    $awardsType = $_GET['player_awards_awards_type'];
+    $fullName = $_GET['player_awards_player_full_name'];
+    $lowerGoalCount = !empty($_GET['lower_player_awards_player_goal_count']) ? $_GET['lower_player_awards_player_goal_count'] : 0;
+    $higherGoalCount = !empty($_GET['higher_player_awards_player_goal_count']) ? $_GET['higher_player_awards_player_goal_count'] : 10000;
+    $lowerAge = !empty($_GET['lower_player_awards_player_age']) ? $_GET['lower_player_awards_player_age'] : 0;
+    $higherAge = !empty($_GET['higher_player_awards_player_age']) ? $_GET['higher_player_awards_player_age'] : 10000;
+    $birthPlace = $_GET['player_awards_player_birth_place'];
+    $seasonYear = $_GET['player_awards_season'];
 
 
-} else if (!empty($_POST['punished_players_penalty_id']) && !empty($_POST['punished_players_player_id'])) {
+    if (($lowerGoalCount <= $higherGoalCount) && ($lowerAge <= $higherAge)) {
+        $sql_statement = "SELECT awards.Award_ID, awards.Season, player_awards.Season, player_awards.Award_Type, players.player_ID, players.full_name, players.goal_count, players.age, players.birth_place   FROM players NATURAL JOIN player_awards NATURAL JOIN awards WHERE Award_Type LIKE '%$awardsType%' AND $lowerGoalCount <= Goal_Count AND $higherGoalCount >= Goal_Count AND $higherAge >= age AND $lowerAge <= age AND Birth_Place LIKE '%$birthPlace%' AND full_name LIKE '%$fullName%'";
+        $result = mysqli_query($db, $sql_statement);
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table
+            echo "<table border='1'>";
 
-    $penalty_id = $_POST['punished_players_penalty_id'];
-    $player_id = $_POST['punished_players_player_id'];
+            // Print the table headers
+            $row = mysqli_fetch_assoc($result);
+            echo "<tr>";
+            foreach ($row as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            echo "</tr>";
+
+            // Print the table rows
+            mysqli_data_seek($result, 0); // Reset the result pointer to the beginning
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($row as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
+
+            // End the table
+            echo "</table>";
+        } else {
+            echo "No records found.";
+        }
+    } else {
+        echo ("Lower value cannot be higher than the higher value! Please enter again.");
+    }
+
+} else if (isset($_GET['punished_players_form'])) {
+    $penaltyType = $_GET['punished_players_penalty_type'];
+    $lowerLength = !empty($_GET['lower_punished_players_penalty_length']) ? $_GET['lower_punished_players_penalty_length'] : 0;
+    $higherLength = !empty($_GET['higher_punished_players_penalty_length']) ? $_GET['higher_punished_players_penalty_length'] : 50;
+    $fullName = $_GET['punished_players_player_full_name'];
+    $lowerGoalCount = !empty($_GET['lower_punished_players_player_goal_count']) ? $_GET['lower_punished_players_player_goal_count'] : 0;
+    $higherGoalCount = !empty($_GET['higher_punished_players_player_goal_count']) ? $_GET['higher_punished_players_player_goal_count'] : 10000;
+    $lowerAge = !empty($_GET['lower_punished_players_player_age']) ? $_GET['lower_punished_players_player_age'] : 0;
+    $higherAge = !empty($_GET['higher_punished_players_player_age']) ? $_GET['higher_punished_players_player_age'] : 10000;
+    $birthPlace = $_GET['punished_players_player_birth_place'];
 
 
+    if (($lowerLength <= $higherLength) && ($lowerGoalCount <= $higherGoalCount) && ($lowerAge <= $higherAge)) {
+        $sql_statement = "SELECT penalty.Penalty_ID, penalty.Penalty_Type, penalty.Penalty_Length, players.player_ID, players.full_name, players.goal_count, players.age, players.birth_place   FROM players NATURAL JOIN punished_players NATURAL JOIN penalty WHERE $lowerLength <= Penalty_Length AND $higherLength >= Penalty_Length AND Penalty_Type LIKE '%$penaltyType%' AND $lowerGoalCount <= Goal_Count AND $higherGoalCount >= Goal_Count AND $higherAge >= age AND $lowerAge <= age AND Birth_Place LIKE '%$birthPlace%' AND full_name LIKE '%$fullName%'";
+        $result = mysqli_query($db, $sql_statement);
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table
+            echo "<table border='1'>";
 
-    $sql_statement = "INSERT INTO punished_players (Penalty_ID, Player_ID) VALUES ('$penalty_id','$player_id')";
+            // Print the table headers
+            $row = mysqli_fetch_assoc($result);
+            echo "<tr>";
+            foreach ($row as $key => $value) {
+                echo "<th>" . $key . "</th>";
+            }
+            echo "</tr>";
 
-    $result = mysqli_query($db, $sql_statement);
-    echo "Your result is: " . $result;
+            // Print the table rows
+            mysqli_data_seek($result, 0); // Reset the result pointer to the beginning
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($row as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
 
+            // End the table
+            echo "</table>";
+        } else {
+            echo "No records found.";
+        }
+    } else {
+        echo ("Lower value cannot be higher than the higher value! Please enter again.");
+    }
 
 } else if (isset($_GET['referees_form'])) {
     $refereeName = $_GET['referees_full_name'];
@@ -562,19 +806,18 @@ if (isset($_GET['awards_form'])) {
 
 } else if (isset($_GET['transfers_form'])) {
 
-    $lowerDate = !empty($_GET['lower_contract_date']) ? $_GET['lower_contract_date'] : date('Y-m-d\TH:i', strtotime('1950-01-01 00:00'));
-    $higherDate = !empty($_GET['higher_contract_date']) ? $_GET['higher_contract_date'] : date('Y-m-d\TH:i', strtotime('2030-01-01 00:00'));
+    /*
+    echo $_GET['lower_contract_date'] . "\n";
+    echo $_GET['higher_contract_date'] . "\n";
+    */
 
-    $lowerDate = DateTime::createFromFormat('Y-m-d\TH:i', $lowerDate);
-    $higherDate = DateTime::createFromFormat('Y-m-d\TH:i', $higherDate);
-
-    $lowerDateString = $lowerDate->format('Y-m-d\TH:i');
-    $higherDateString = $higherDate->format('Y-m-d\TH:i');
+    $lowerDate = !empty($_GET['lower_contract_date']) ? $_GET['lower_contract_date'] : date('Y-m-d\TH:i', strtotime('2030-01-01 00:00'));
+    $higherDate = !empty($_GET['higher_contract_date']) ? $_GET['higher_contract_date'] : date('Y-m-d\TH:i', strtotime('1950-01-01 00:00'));
 
     // date_create('31 Oct 1950 4:45am') date_create('31 Oct 2030 4:45am')
 
     if ($higherDate >= $lowerDate) {
-        $sql_statement = "SELECT * FROM transfers WHERE '$lowerDateString' <= Contract_Date AND '$higherDateString' >= Contract_Date";
+        $sql_statement = "SELECT * FROM transfers WHERE $lowerDate <= Contract_Date AND $higherDate >= Contract_Date";
         $result = mysqli_query($db, $sql_statement);
         if (mysqli_num_rows($result) > 0) {
             // Start the table
